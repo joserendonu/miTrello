@@ -1,12 +1,73 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Mis Tareas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h1>Welcome to the Home Page</h1>
-  <p>This is a basic HTML page.</p>
 
+  <!-- Botón agregar -->
+  <ion-button expand="block" (click)="openAddModal()">
+    ➕ Agregar Tarea
+  </ion-button>
+
+  <!-- LISTA POR PRIORIDAD -->
+
+  <!-- URGENTE -->
+  <h2>🔥 Urgente</h2>
+  <ion-list>
+    <ion-item *ngFor="let task of getTasksByPriority('urgente')">
+      <ion-label>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+      </ion-label>
+
+      <ion-badge [color]="getPriorityColor(task.priority)">
+        {{ task.priority }}
+      </ion-badge>
+
+      <ion-button color="danger" fill="clear" (click)="deleteTask(task.id!)">
+        🗑
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- SECUNDARIA -->
+  <h2>⚡ Secundaria</h2>
+  <ion-list>
+    <ion-item *ngFor="let task of getTasksByPriority('secundaria')">
+      <ion-label>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+      </ion-label>
+
+      <ion-badge [color]="getPriorityColor(task.priority)">
+        {{ task.priority }}
+      </ion-badge>
+
+      <ion-button color="danger" fill="clear" (click)="deleteTask(task.id!)">
+        🗑
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- LARGO PLAZO -->
+  <h2>🌱 Largo Plazo</h2>
+  <ion-list>
+    <ion-item *ngFor="let task of getTasksByPriority('largo-plazo')">
+      <ion-label>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+      </ion-label>
+
+      <ion-badge [color]="getPriorityColor(task.priority)">
+        {{ task.priority }}
+      </ion-badge>
+
+      <ion-button color="danger" fill="clear" (click)="deleteTask(task.id!)">
+        🗑
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

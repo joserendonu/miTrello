@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent} from '@ionic/angular/standalone';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge
+} from '@ionic/angular/standalone';
+import { NgFor } from '@angular/common';
 // , IonButton 
 import { Todo } from '../services/todo';
 import { Task } from '../models/task.model';
 import { AlertController } from '@ionic/angular';
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -12,16 +22,20 @@ import { AlertController } from '@ionic/angular';
     IonHeader,
     IonToolbar,
     IonTitle,
-    IonContent
-    // ,
-    // IonButton
+    IonContent,
+    IonButton,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonBadge,
+    NgFor
   ],
   templateUrl: 'home.page.html',
 })
 export class HomePage implements OnInit {
   tasks: Task[] = [];
 
-  constructor(private todoService: Todo, private alertCtrl: AlertController) {}
+  constructor(private todoService: Todo, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.todoService.getTasks().subscribe(res => {
@@ -34,7 +48,7 @@ export class HomePage implements OnInit {
   }
 
   getPriorityColor(priority: string) {
-    switch(priority) {
+    switch (priority) {
       case 'urgente': return 'danger';
       case 'secundaria': return 'warning';
       case 'largo-plazo': return 'success';
@@ -51,9 +65,9 @@ export class HomePage implements OnInit {
       ],
       buttons: [
         { text: 'Cancelar', role: 'cancel' },
-        { 
-          text: 'Siguiente', 
-          handler: (data) => this.selectPriority(data) 
+        {
+          text: 'Siguiente',
+          handler: (data) => this.selectPriority(data)
         }
       ]
     });
