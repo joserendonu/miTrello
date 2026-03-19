@@ -1,10 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent} from '@ionic/angular/standalone';
+// , IonButton 
 import { Todo } from '../services/todo';
 import { Task } from '../models/task.model';
 import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent
+    // ,
+    // IonButton
+  ],
   templateUrl: 'home.page.html',
 })
 export class HomePage implements OnInit {
