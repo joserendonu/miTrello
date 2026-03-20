@@ -24,14 +24,23 @@ import { provideRouter } from '@angular/router'; // 👈 IMPORTANTE
 import { routes } from './app/app.routes';       // 👈 IMPORTANTE
 import { provideIonicAngular } from '@ionic/angular/standalone'; // 👈 ESTE FALTABA
 import { provideFirestore, getFirestore } from '@angular/fire/firestore'; // 👈 IMPORTANTE
-
+import { connectFirestoreEmulator } from '@angular/fire/firestore';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideIonicAngular(),   // 👈 NECESARIO PARA IONIC
     provideRouter(routes), // 👈 ESTO SOLUCIONA EL ERROR
-    provideFirestore(() => getFirestore()), // 👈 ESTA LÍNEA SOLUCIONA TODO
+    provideFirestore(() => {
+      const firestore = getFirestore();
+
+      // 👇 CONDICIÓN
+      if (location.hostname === 'localhost') {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+
+      return firestore;
+    }), // 👈 ESTA LÍNEA SOLUCIONA TODO
     provideFirebaseApp(() => initializeApp(environment.firebase))
-    
+
   ]
 }).catch(err => console.error(err));
