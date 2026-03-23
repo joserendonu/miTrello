@@ -25,3 +25,22 @@
 #container a {
   text-decoration: none;
 }
+
+// ASDF
+.task-done {
+  opacity: 0.6;
+  transform: scale(0.98);
+  transition: all 0.3s ease;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+ion-item {
+  transition: all 0.3s ease;
+}
+
+ion-item:hover {
+  transform: scale(1.02);
+}
